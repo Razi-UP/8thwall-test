@@ -1,0 +1,23 @@
+{
+  "imagePath": "image-targets/qr-code_luminance.png",
+  "metadata": null,
+  "name": "qr-code",
+  "type": "PLANAR",
+  "properties": {
+    "top": 0,
+    "left": 145,
+    "width": 866,
+    "height": 1155,
+    "isRotated": false,
+    "originalWidth": 1155,
+    "originalHeight": 1155
+  },
+  "resources": {
+    "originalImage": "qr-code_original.png",
+    "croppedImage": "qr-code_cropped.png",
+    "thumbnailImage": "qr-code_thumbnail.png",
+    "luminanceImage": "qr-code_luminance.png"
+  },
+  "created": 1774449338898,
+  "updated": 1774449338898
+}
