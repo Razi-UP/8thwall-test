@@ -72,11 +72,11 @@
     const clicks = { red: 0, blue: 0 };
     const step = 2;
 
-    function applyColor(color) {
+    function applyColor(color, value) {
       if (color !== 'red' && color !== 'blue') return;
-      clicks[color]++;
+      clicks[color] = value;
       document.getElementById(color + 'Count').textContent = clicks[color];
-      levels[color] = Math.min(100, levels[color] + step);
+      levels[color] = Math.min(100, clicks[color]);
       document.getElementById(color + 'Fill').style.height = levels[color] + '%';
     }
 
@@ -91,7 +91,7 @@
         //const text = (await res.text()).trim().toLowerCase();
         const text = await res.text();
         console.log(text)
-        //applyColor(color);
+        applyColor(color, Number(text));
       } catch (e) {
         console.error('Fetch error:', e);
       }
