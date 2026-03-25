@@ -53,19 +53,32 @@
       opacity: 0.9;
       user-select: none;
     }
+
+    #qr-overlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+
+  <div class="side blue">
+    <div class="fill" id="blueFill"></div>
+    <div class="count" id="blueCount">0</div>
+  </div>
 
   <div class="side red">
     <div class="fill" id="redFill"></div>
     <div class="count" id="redCount">0</div>
   </div>
 
-  <div class="side blue">
-    <div class="fill" id="blueFill"></div>
-    <div class="count" id="blueCount">0</div>
-  </div>
+  <img id="qr-overlay" src="qr-code.png" alt="QR Code">
 
   <script>
     const levels = { red: 0, blue: 0 };
@@ -96,7 +109,7 @@
       } catch (e) {
         console.error('Fetch error:', e);
       } finally {
-        setTimeout(pollColor, 3000, color);
+        setTimeout(pollColor, 1000, color);
       }
       
     }
