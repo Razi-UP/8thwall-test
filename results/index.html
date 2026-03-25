@@ -92,10 +92,13 @@
         const text = await res.text();
         console.log(text)
         applyColor(color, Number(text));
-        setTimeout(pollColor(color), 1000);
+        
       } catch (e) {
         console.error('Fetch error:', e);
+      } finally {
+        setTimeout(pollColor(color), 2000);
       }
+      
     }
 
     pollColor("red");
