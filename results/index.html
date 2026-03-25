@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red & Blue</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .side {
+      flex: 1;
+      position: relative;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0%;
+      transition: height 0.4s ease;
+    }
+
+    .red .fill {
+      background-color: #e63946;
+    }
+
+    .blue .fill {
+      background-color: #1d3d8f;
+    }
+
+    .count {
+      position: relative;
+      z-index: 1;
+      font-size: 5rem;
+      font-weight: bold;
+      color: white;
+      opacity: 0.9;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="side red">
+    <div class="fill" id="redFill"></div>
+    <div class="count" id="redCount">0</div>
+  </div>
+
+  <div class="side blue">
+    <div class="fill" id="blueFill"></div>
+    <div class="count" id="blueCount">0</div>
+  </div>
+
+  <script>
+    const levels = { red: 0, blue: 0 };
+    const clicks = { red: 0, blue: 0 };
+    const step = 2;
+
+    function applyColor(color) {
+      if (color !== 'red' && color !== 'blue') return;
+      clicks[color]++;
+      document.getElementById(color + 'Count').textContent = clicks[color];
+      levels[color] = Math.min(100, levels[color] + step);
+      document.getElementById(color + 'Fill').style.height = levels[color] + '%';
+    }
+
+    async function pollColor(color) {
+      const form = new FormData();
+      form.append('color', color);
+      try {
+        const res = await fetch('https://interactivewedding.com/digipenInterview/getColor.php', {
+          method: 'POST',
+          body: form
+        });
+        //const text = (await res.text()).trim().toLowerCase();
+        const text = await res.text();
+        console.log(text)
+        //applyColor(color);
+      } catch (e) {
+        console.error('Fetch error:', e);
+      }
+
+      //setTimeout(pollColor(color), 1000);
+    }
+
+    pollColor("red");
+    pollColor("blue");
+  </script>
+
+</body>
+</html>
