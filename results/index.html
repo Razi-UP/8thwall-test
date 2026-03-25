@@ -96,7 +96,7 @@
       } catch (e) {
         console.error('Fetch error:', e);
       } finally {
-        setTimeout(pollColor(color), 3000);
+        setTimeout(()=>{pollColor(color)}, 3000);
       }
       
     }
